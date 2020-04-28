@@ -1,0 +1,26 @@
+package com.aio.spider.common.config;
+
+import com.aio.spider.SpiderApplication;
+import org.junit.jupiter.api.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
+
+/** 爬虫测试
+ * @author ChenHao
+ * @title: AioScheduledTest
+ * @date 2020-04-28 13:30
+ */
+@RunWith(SpringRunner.class)
+@SpringBootTest(classes={SpiderApplication.class})// 指定启动类
+class AioScheduledTest {
+
+    @Autowired
+    private AioScheduled aioScheduled;
+
+    @Test
+    void daoJiaLeHouseSpider() {
+        aioScheduled.daoJiaLeHouseSpider();
+    }
+}
