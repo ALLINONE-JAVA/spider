@@ -7,8 +7,9 @@ package com.aio.spider.common.config.constant;
  */
 public class SpiderConstants {
 
-
+    /** 爬虫传输相关Key值 */
     public static String SPIDER_TYPE_KEY = "type";
+    public static String SPIDER_DATA_KEY = "data";
 
-    public static String SPIDER_DATA_KEY = "type";
+
 }

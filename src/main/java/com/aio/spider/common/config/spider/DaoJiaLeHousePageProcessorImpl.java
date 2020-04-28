@@ -29,7 +29,7 @@ import java.util.stream.Collectors;
  */
 public class DaoJiaLeHousePageProcessorImpl implements PageProcessor {
 
-    public static final String regex =  "[^<>]*?\\s src=['\"]?(.*?)['\"]?\\s.*? [^<>]*?\\s tit=['\"]?(.*?)['\"]?\\s.*?>";
+    public static final String regex =  "<img[^<>]*?\\ssrc=['\"]?(.*?)['\"]?\\s.*?[^<>]*?\\stit=['\"]?(.*?)['\"]?\\s.*?>";
     public static final Pattern pattern = Pattern.compile(regex);
 
 
@@ -114,7 +114,10 @@ public class DaoJiaLeHousePageProcessorImpl implements PageProcessor {
         while (matcher.find()){
             String group2 = matcher.group();
             String group = matcher.group(1);
-            String group1 = matcher.group(3);
+            String group1 = matcher.group(2);
+            System.out.println(group2);
+            System.out.println(group);
+            System.out.println(group1);
         }
         List<String> match = match(source, "img", "src");
         DaoJiaLeHouseResourceDto daoJiaLeHouseResourceDto = new DaoJiaLeHouseResourceDto();

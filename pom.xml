@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.aio</groupId>
-    <artifactId>monomer</artifactId>
+    <artifactId>spider</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>spider</name>
     <description>爬虫项目</description>
