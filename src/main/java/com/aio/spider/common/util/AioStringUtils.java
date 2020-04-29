@@ -10,15 +10,22 @@ import org.springframework.util.StringUtils;
  */
 public class AioStringUtils {
 
-    /**
-    * @description : 判断String是不是空
-    * @author      : Mr.chen
-    * @date        : 2020/3/27 12:12
-    * @param       :
-    * @return      : 
-    */
-    public static Boolean isEmpty(String arg){
-        return StringUtils.isEmpty(arg);
+    /***
+     * @Description:  判断string是否为空
+     */
+    public static boolean isEmpty(String ... str){
+        for (String s : str) {
+            if(org.springframework.util.StringUtils.isEmpty(s)){
+                return true;
+            }
+        }
+        return false;
     }
 
+    /***
+     * @Description:  判断string是否为空
+     */
+    public static boolean isNotEmpty(String ... str){
+        return !isEmpty(str);
+    }
 }

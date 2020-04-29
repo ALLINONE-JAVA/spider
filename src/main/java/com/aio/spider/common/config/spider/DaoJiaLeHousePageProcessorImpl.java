@@ -3,6 +3,8 @@ package com.aio.spider.common.config.spider;
 import com.aio.spider.common.config.constant.DaoJiaLeSpiderConstants;
 import com.aio.spider.common.config.constant.SpiderConstants;
 import com.aio.spider.common.emun.SpiderTypeEnum;
+import com.aio.spider.common.util.AioStringUtils;
+import com.aio.spider.common.util.MatcherUtils;
 import com.aio.spider.core.dto.in.DaoJiaLeHouseDto;
 import com.aio.spider.common.util.LogUtil;
 import com.aio.spider.core.dto.in.DaoJiaLeHouseResourceDto;
@@ -16,10 +18,7 @@ import us.codecraft.webmagic.processor.PageProcessor;
 import us.codecraft.webmagic.selector.Html;
 import us.codecraft.webmagic.selector.Selectable;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 /** 到家了房源爬虫页面处理器
@@ -28,9 +27,6 @@ import java.util.stream.Collectors;
  * @date 2020-04-28 10:29
  */
 public class DaoJiaLeHousePageProcessorImpl implements PageProcessor {
-
-    public static final String regex =  "<img[^<>]*?\\ssrc=['\"]?(.*?)['\"]?\\s.*?[^<>]*?\\stit=['\"]?(.*?)['\"]?\\s.*?>";
-    public static final Pattern pattern = Pattern.compile(regex);
 
 
     // 设置抓取参数
@@ -108,32 +104,16 @@ public class DaoJiaLeHousePageProcessorImpl implements PageProcessor {
     }
 
 
+    // 解析img标签
     private static DaoJiaLeHouseResourceDto DaoJiaLeHouseResourceDto(String source){
-        // 正则表达式获取数据
-        Matcher matcher = pattern.matcher(source);
-        while (matcher.find()){
-            String group2 = matcher.group();
-            String group = matcher.group(1);
-            String group1 = matcher.group(2);
-            System.out.println(group2);
-            System.out.println(group);
-            System.out.println(group1);
-        }
-        List<String> match = match(source, "img", "src");
         DaoJiaLeHouseResourceDto daoJiaLeHouseResourceDto = new DaoJiaLeHouseResourceDto();
+        daoJiaLeHouseResourceDto.setName(MatcherUtils.match(source,"img","tit"));
+        daoJiaLeHouseResourceDto.setUrl(MatcherUtils.match(source,"img","src"));
+        if(AioStringUtils.isEmpty(daoJiaLeHouseResourceDto.getUrl())){
+            return null;
+        }
         return daoJiaLeHouseResourceDto;
     }
-    public static List<String> match(String source, String element, String attr) {
-        List<String> result = new ArrayList<>();
-        String reg = "<" + element + "[^<>]*?\\s" + attr + "=['\"]?(.*?)['\"]?\\s.*?>";
-        Matcher m = Pattern.compile(reg).matcher(source);
-        while (m.find()) {
-            String r = m.group(0);
-            r = m.group(1);
-            r = m.group(2);
-            r = m.group(3);
-            result.add(r);
-        }
-        return result;
-    }
+    // 解析获取html属性值
+
 }

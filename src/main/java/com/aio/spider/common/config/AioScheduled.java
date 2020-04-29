@@ -26,7 +26,7 @@ public class AioScheduled  {
     * @Author: ChenHao
     * @date: 2020-04-28
     */
-    @Scheduled(cron = "0 05 22 ? * *")
+    @Scheduled(cron = "0 12 14 ? * *")
     public void daoJiaLeHouseSpider(){
         LogUtil.info(getClass(),"到家了爬虫调度任务开始执行...");
         try {
